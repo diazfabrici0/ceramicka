@@ -1,4 +1,4 @@
-import React from 'react'
+//import React from 'react'
 import { navbarLinks }from '../../constants/links'
 import { NavLink, Link } from 'react-router-dom'
 import { HiOutlineSearch } from 'react-icons/hi'
@@ -25,12 +25,17 @@ export const Navbar = () => {
             <button>
                 <HiOutlineSearch size={20} />
             </button>
-        </div>
         <div className="relative">
             <Link to="/account" className='border-2 border-slate-700 w-9 h-9 rounded-full grid place-items-center text-lg font-bold'>
             r
             </Link>
         </div>
+        <button className="relative">
+            <span className='absolute -bottom-2 -right-2 w-5 h-5 grid place-items-center bg-black text-white text-xs rounded-full'>0</span>
+        </button>
+        <div className="relative"></div>
+    </div>
+
     </header>
   )
 }
