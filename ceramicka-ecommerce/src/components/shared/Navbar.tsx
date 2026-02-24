@@ -3,10 +3,12 @@ import { navbarLinks }from '../../constants/links'
 import { NavLink, Link } from 'react-router-dom'
 import { HiOutlineSearch, HiOutlineShoppingBag } from 'react-icons/hi'
 import { FaBarsStaggered } from 'react-icons/fa6'
+import { Logos } from './Logos'
 
 export const Navbar = () => {
   return (
     <header className='bg-white text-black py-4 flex items-center justify-between px-5 border-b border-slate-200 lg:px-12'>
+        <Logos />
         <nav className='space-x-5 hiddem md:flex'>
            {
             navbarLinks.map(link => (
