@@ -17,8 +17,8 @@ export const Newsletter = () => {
                     <input type="email" className="border border-slate200 rounded-full focus-outline-none py-3 px-5 w-full text-xs font-medium"
                     placeholder="Correo Electronico" />
 
-                 <button className="bg-black text-white font-semibold rounded-full uppercase traching-wider
-                 py-3 text-xs xl:px-5"></button>
+                 <button className="bg-black text-white font-semibold rounded-full uppercase tracking-wider
+                 py-3 text-xs xl:px-5">Recibir noticias</button>
                 </form>
                 </div>
 
