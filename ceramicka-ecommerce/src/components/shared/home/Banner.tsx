@@ -1,31 +1,22 @@
-import { Link } from "react-router-dom"
 
 export const Banner = () => {
     return (
-        <div className="relative bg-gray-900 text-white">
-            <div className="absolute inset-0 bg-cover opacity-90 h-full"
-                style={{ backgroundImage: "url('/img/banner2.jpeg')",
-                        backgroundPosition: 'center 42%',
-                 }}>
-
-
-
-            </div>
-            <div className="absolute inset-0 bg-black opacity-50">
+        <div className="relative bg-gray-900 text-white p-10">
+<div className="absolute inset-0 bg-cover bg-center opacity-90 h-full"
+    style={{ 
+        backgroundImage: "url('/img/bannerCactus2.png')",
+        // Mantenemos tu posición personalizada para ajustar la "altura" del zoom
+        backgroundPosition: 'center 56%', 
+        backgroundSize: '100%'
+    }}
+>
+</div>
+            <div className="absolute inset-0 bg-black opacity-10">
 
             </div>
 
             <div className="relative z-10 flex flex-col items-center justify-center py-20 lg:py-4 text-center lg:px-8">
-                <h1 className="text-4xl font-bold mb-4 lg:text-6xl">
-                    Texto de ejemplo
-                </h1>
-
-                <p className="text-lg mb-8 lg:text-2xl">
-                    Texto de ejemplo de descripcion para el banner
-                </p>
-                <Link to="/stock" className="bg-gray-900 hover:bg-gray-950 text-white font-semibold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out">
-                    Ver Piezas
-                </Link>
+                <img src="../../../img/ceramickaLogo.png" alt="Logo" className="w-45 h-45 mr-2" />
             </div>
         </div>
     )

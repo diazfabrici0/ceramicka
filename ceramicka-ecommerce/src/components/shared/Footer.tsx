@@ -4,22 +4,22 @@ import { socialLinks } from "../../constants/links"
 
 export const Footer = () => {
     return (
-        <footer className="py-16 bg-gray-950 px-12 flex justify-between gap-10 text-sm text-slate-200 flex-wrap
+        <footer className="py-16 bg-[#f880b8] px-12 flex justify-between gap-10 text-sm text-slate-200 flex-wrap
         md:flex-nowrap">
             <Link to="/" className={`text-2xl font-bold tracking-tighter transition-all text-white flex-1`}>
                 <p className="hidden lg:block">Cera</p>
-                <span className="text-cyan-600">Micka</span>
+                <span className="text-[#9c3c69]">Micka</span>
             </Link>
             <div className="flex flex-col gap-4 flex-1">
                 <p className="fonr-semibold uppercase tracking-tighter">
-                    Suscribite
+                    Contacto
                 </p>
                 <p className="text-xs-font-medium">
-                    Recibi descuentos!
+                    Enviame un mensaje!
                 </p>
                 <div className="border border-gray-800 flex items-center gap-2 px-3 py-2 rounded-full">
                     <input type="email" placeholder="Correo Electronico"
-                    className="pl-2 bg-gray-950 text-slate-200 w-full focus:outline-none"/>
+                    className="pl-2 bg-[gray-950] text-slate-200 w-full focus:outline-none"/>
 
                     <button className="text-slate-200">
                         <BiChevronRight size={20} />
@@ -32,8 +32,7 @@ export const Footer = () => {
                 </p>
                 <nav className="flex flex-col gap-2 text-xs font-medium">
                     <Link to="/stock">Productos</Link>
-                    <Link to="#">Politicas de privacidad</Link>
-                    <Link to="#">Terminos de uso</Link>
+
                 </nav>
             </div>
             <div className="flex flex-col gap-4 flex-1">

@@ -15,7 +15,7 @@ export const Navbar = () => {
                 <NavLink 
                     key={link.id}
                     to={link.href}
-                    className={({isActive}) =>  `${isActive ? 'text-cyan-600 underline': ''} transition-all duration-300 font-medium hover:text-cyan-600
+                    className={({isActive}) =>  `${isActive ? 'text-[#f880b8] underline': ''} transition-all duration-300 font-medium hover:text-[#f880b8]
                     hover:underline ` 
                 }
                 >

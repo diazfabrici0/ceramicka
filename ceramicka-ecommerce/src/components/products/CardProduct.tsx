@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 interface Props {
     img: string;
     name: string;
-    price: number;
+    //price: number;
     slug: string;
 }
 
 export const CardProduct = ({
     img,
     name,
-    price, 
+    //price, 
     slug
 }:Props) => {
     return(

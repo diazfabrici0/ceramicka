@@ -35,19 +35,19 @@ export const HomePage = () => {
     if (loading) return <p className="text-center">Cargando piezas únicas...</p>;
 
     return (
-        <div>
-            <FeatureGrid />
+        <div className="w-screen">
+            {/* <FeatureGrid /> */}
 
             {/* Mostramos los productos reales traídos de Supabase */}
             <ProductGrid
-                title="Nuevas Piezas"
+                title="Nuevas Piezas!"
                 products={products} 
             />
 
             {/* Si quieres filtrar por categorías en los otros grids, 
                 podrías usar products.filter(p => p.categoria === 'joyas') */}
             <ProductGrid
-                title="Colección Destacada"
+                title="Stock"
                 products={products.slice(0, 4)} // Ejemplo: solo los primeros 4
             />
         </div>
