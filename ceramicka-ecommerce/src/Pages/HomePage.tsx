@@ -1,38 +1,30 @@
 // @ts-ignore
 
 import { useEffect, useState } from "react";
-import  {supabase} from "../lib/supabaseClient.ts";
-import { FeatureGrid } from "../components/shared/home/FeatureGrid";
 import { ProductGrid } from "../components/shared/home/ProductGrid";
+import { getProducts } from '../services/getProducts.ts';
 
 export const HomePage = () => {
     const [products, setProducts] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetchProducts();
+        const fetchAllProducts = async () => {
+            try {
+                setLoading(true);
+                const data = await getProducts(); // <--- Aquí invocas la función
+                setProducts(data || []);
+            } catch (error) {
+                // Manejo de errores visuales si fuera necesario
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchAllProducts();
     }, []);
 
-    const fetchProducts = async () => {
-        try {
-            setLoading(true);
-            // 'productos' debe ser el nombre exacto de tu tabla en Supabase
-            const { data, error } = await supabase
-                .from('product') 
-                .select('*')
-                .order('created_at', { ascending: false }); // Los más nuevos primero
-
-                console.log("Datos de Supabase:", data); // <--- AGREGA ESTO
-            if (error) throw error;
-            setProducts(data);
-        } catch (error: any) {
-            console.error("Error cargando productos:", error.message);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    if (loading) return <p className="text-center">Cargando piezas únicas...</p>;
+    if (loading) return <p>Cargando...</p>;
 
     return (
         <div className="w-screen">
