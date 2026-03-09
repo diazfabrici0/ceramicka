@@ -30,12 +30,6 @@ export const socialLinks = [
     },
     {
         id: 2, 
-        title: "Facebook",
-        href: "https://www.facebook.com/ceramicka.arg",
-        icon: <FaInstagram size={20} />
-    },
-    {
-        id: 3, 
         title: "Whatsapp",
         href: "https://wa.me/5492995774749",
         icon: <FaInstagram size={20} />

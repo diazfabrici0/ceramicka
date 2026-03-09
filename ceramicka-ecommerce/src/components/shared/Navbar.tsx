@@ -26,20 +26,14 @@ export const Navbar = () => {
         </nav>
         <div className="flex gap-5 items-center">
             <button>
-                <HiOutlineSearch size={20} />
+                <HiOutlineSearch size={20} color="#f880b8" />
             </button>
         <div className="relative">
-            <Link to="/account" className='border-2 border-slate-700 w-9 h-9 rounded-full grid place-items-center text-lg font-bold'>
-            r
+            <Link to="/account" className='border-2 border-[#f880b8] w-9 h-9 rounded-full grid place-items-center text-sm font-bold text-[#f880b8]'>
+            M.B
             </Link>
         </div>
-        <button className="relative">
-            <span className='absolute -bottom-2 -right-2 w-5 h-5 grid place-items-center bg-black text-white text-xs rounded-full'>
-                0
-            </span>
-            <HiOutlineShoppingBag size={20} />
-        </button>
-<button className="md:hidden"><FaBarsStaggered size={20} /></button>
+<button className="md:hidden"><FaBarsStaggered size={20} color="#f880b8" /></button>
     </div>
 
     </header>
