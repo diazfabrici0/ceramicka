@@ -4,8 +4,13 @@ import { NavLink, Link } from 'react-router-dom'
 import { HiOutlineSearch } from 'react-icons/hi'
 import { FaBarsStaggered } from 'react-icons/fa6'
 import { Logos } from './Logos'
+import { useAuth } from '../../context/AuthContext'
+
 
 export const Navbar = () => {
+const { isAuthenticated, user } = useAuth();
+
+
   return (
     <header className='bg-white text-black py-4 flex items-center justify-between px-5 border-b border-slate-200 lg:px-12'>
         <Logos />
@@ -29,11 +34,11 @@ export const Navbar = () => {
                 <HiOutlineSearch size={20} color="#f880b8" />
             </button>
         <div className="relative">
-            <Link to="/account" className='border-2 border-[#f880b8] w-9 h-9 rounded-full grid place-items-center text-sm font-bold text-[#f880b8]'>
-            M.B
+            <Link to={isAuthenticated ? "/account" : "/loginAdmin"}>
+                {isAuthenticated ? user?.name.substring(0, 2): "Acceder"}
             </Link>
         </div>
-<button className="md:hidden"><FaBarsStaggered size={20} color="#f880b8" /></button>
+        <button className="md:hidden"><FaBarsStaggered size={20} color="#f880b8" /></button>
     </div>
 
     </header>
