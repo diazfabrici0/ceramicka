@@ -1,7 +1,7 @@
 //import React from 'react'
 import { navbarLinks }from '../../constants/links'
 import { NavLink, Link } from 'react-router-dom'
-import { HiOutlineSearch, HiOutlineShoppingBag } from 'react-icons/hi'
+import { HiOutlineSearch } from 'react-icons/hi'
 import { FaBarsStaggered } from 'react-icons/fa6'
 import { Logos } from './Logos'
 
