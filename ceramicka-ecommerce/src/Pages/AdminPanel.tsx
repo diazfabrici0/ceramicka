@@ -1,7 +1,7 @@
 export const AdminPanel = () => {
     return (
         <div>
-            hola desde admin
+            hola desde panel
         </div>
     );
 }

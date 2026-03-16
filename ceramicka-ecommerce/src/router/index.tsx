@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { RootLayout } from "../layouts/RootLayout";
-import { HomePage, PiecesPage, AboutPage, LoginAdmin, Account } from "../Pages";
+import { HomePage, PiecesPage, AboutPage, LoginAdmin, Account, AdminPanel } from "../Pages";
 import { Product } from "../components/shared/product/Product";
 
 export const router = createBrowserRouter([
@@ -31,6 +31,10 @@ export const router = createBrowserRouter([
         {
             path:'loginAdmin',
             element:<LoginAdmin  />
+        },
+        {
+            path:'adminPanel',
+            element:<AdminPanel />
         }
         ]
     }
