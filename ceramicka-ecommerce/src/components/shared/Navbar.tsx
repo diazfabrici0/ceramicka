@@ -45,7 +45,7 @@ const adminIintial = user?.email?.charAt(0).toUpperCase() || "A";
             <div className='relative flex items-center gap-4'>
                 {isAuthenticated ? (
                     <div className='flex items-center gap-3'>
-                        <Link to ="/adminPanel" className="w-8 h-8 bg-[#f880b8] text-white rounded-full flex items-center justify-center font-bold text-xs">
+                        <Link to ="/account" className="w-8 h-8 bg-[#f880b8] text-white rounded-full flex items-center justify-center font-bold text-xs">
                             {adminIintial}                        
                         </Link>
                         <button onClick={logout}
