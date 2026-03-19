@@ -1,7 +1,22 @@
+import { useNavigate } from "react-router-dom";
 import { CategoriesForm } from "../components/categories/CategoriesForm";
 import { ProductsForm } from "../components/products/ProductForm";
+import { useAuth } from "../hooks/useAuth";
+import { useEffect } from "react";
 
 export const AdminPanel = () => {
+    const { user, loading } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if (!loading && !user) {
+            navigate('/loginAdmin');
+        }
+    }, [user, loading, navigate])
+
+    if(loading) return <p>Autenticando...</p>;
+
+    if(!user) return null;
     return (
         <div className="min-h-screen bg-gray-50 p-8">
             <header className="max-w-4xl mx-auto mb-10">

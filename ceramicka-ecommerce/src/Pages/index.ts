@@ -1,6 +1,5 @@
 export * from "./HomePage"
-export * from "./AboutPage"
-export * from "./PiecesPage"
+export * from "./Stock"
 export * from "./AdminPanel"
 export * from "./LoginAdmin"
 export * from "./Account"

@@ -18,7 +18,6 @@ return (
                         : product.images;
 
                     return (
-                        /* 2. Cambiamos el div por Link y añadimos la ruta dinámica */
                         <Link 
                             to={`/product/${product.id}`} 
                             key={product.id} 

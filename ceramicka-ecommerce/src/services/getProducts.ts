@@ -10,15 +10,20 @@ export interface Product {
     created_at?: string;
 }
 
-export const getProducts = async (): Promise<Product[]> => {
+export const getProducts = async (limit: number | null = null): Promise<Product[]> => {
     try {
-        const { data, error } = await supabase
+        let query = supabase 
             .from('product')
             .select('*')
             .order('created_at', { ascending: false });
 
-        if (error) throw error;
+        if (limit){
+            query = query.limit(limit)
+        }
 
+        const { data, error } = await query;
+
+        if (error) throw error;
         // Retornamos los datos asegurando que cumplen con la interfaz Product
         return (data as Product[]) || [];
     } catch (error: any) {

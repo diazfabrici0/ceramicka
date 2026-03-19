@@ -14,11 +14,6 @@ export const navbarLinks = [
         title: "stock",
         href: "/stock",
     },
-    {
-        id: 3,
-        title: "sobremi",
-        href: "/sobremi",
-    },
 ]
 
 export const socialLinks = [

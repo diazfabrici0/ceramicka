@@ -20,8 +20,8 @@ const adminIintial = user?.email?.charAt(0).toUpperCase() || "A";
                 <NavLink 
                     key={link.id}
                     to={link.href}
-                    className={({isActive}) =>  `${isActive ? 'text-[#f880b8] underline': ''} transition-all duration-300 font-medium hover:text-[#f880b8]
-                    hover:underline ` 
+                    className={({isActive}) =>  `${isActive ? 'text-[#f880b8] ': ''} transition-all duration-300 font-medium hover:text-[#f880b8]
+                     ` 
                 }
                 >
                     {link.title}

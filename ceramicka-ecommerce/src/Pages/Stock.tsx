@@ -1,20 +1,18 @@
-// @ts-ignore
-
 import { useEffect, useState } from "react";
 import { ProductGrid } from "../components/shared/home/ProductGrid";
-import { getProducts } from '../services/getProducts.ts';
+import { getProducts } from "../services/getProducts";
 
-export const HomePage = () => {
+export const Stock = () => {
     const [products, setProducts] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+    useEffect(()=>{
         const fetchAllProducts = async () => {
-            try {
+            try{
                 setLoading(true);
-                const data = await getProducts(4); // <--- Aquí invocas la función
+                const data = await getProducts();
                 setProducts(data || []);
-            } catch (error) {
+            } catch (error){
                 return <p>Error obteniendo los productos</p> 
             } finally {
                 setLoading(false);
@@ -24,17 +22,11 @@ export const HomePage = () => {
         fetchAllProducts();
     }, []);
 
-    if (loading) return <p>Cargando...</p>;
+    if (loading) return <p>Cargando...</p>
 
     return (
         <div className="w-screen">
-            {/* <FeatureGrid /> */}
-
-            {/* Mostramos los productos reales traídos de Supabase */}
-            <ProductGrid
-                title="Nuevas Piezas!"
-                products={products} 
-            />
+            <ProductGrid title="Stock disponible" products={products}/>
         </div>
-    );
-};
+    )
+}
