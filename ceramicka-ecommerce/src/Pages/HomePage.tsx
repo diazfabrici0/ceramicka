@@ -1,8 +1,8 @@
 // @ts-ignore
 
 import { useEffect, useState } from "react";
-import { ProductGrid } from "../components/shared/home/ProductGrid";
-import { getProducts } from '../services/getProducts.ts';
+import { ProductGrid } from "../components/shared/home/ProductGrid.tsx";
+import { getProducts } from '../services/productService.ts';
 
 export const HomePage = () => {
     const [products, setProducts] = useState<any[]>([]);
