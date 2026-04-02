@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
                 element:<Stock />
             },
         {
-            path:'producto/:id',
+            path:'product/:id',
             element:<Product  />
         },
         {

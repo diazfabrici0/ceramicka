@@ -41,6 +41,22 @@ export const getProducts = async (limit: number | null = null): Promise<Product[
     }
 };
 
+export const getProdductById = async (id: number | string) => {
+    const { data, error } = await supabase
+        .from('product')
+        .select('*')
+        .eq('id', id)
+        .is('deleted_at', null)
+        .gt('stock', 0)
+        .single();
+
+        if(error){
+            throw new Error(error.message);
+        }
+
+        return data;
+}
+
 export const updateProduct = async (id: number, updates: Partial<Product>) => {
     const {data, error} = await supabase
         .from('product')
