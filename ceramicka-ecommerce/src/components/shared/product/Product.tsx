@@ -20,7 +20,6 @@ export const Product = () => {
 
     return(
         <div>
-            <div>producto {id}</div>
             <div>nombre {producto.name}</div>
             <p>Descripcion {producto.description}</p>
             <p>precio {producto.price}</p>
@@ -33,6 +32,5 @@ export const Product = () => {
                 />
             </div>
         </div>
-
     )
 }

@@ -70,7 +70,7 @@ export const updateProduct = async (id: number, updates: Partial<Product>) => {
 export const deleteProduct = async (id: number) => {
     const {error} = await supabase
         .from('product')
-        .update({ delete_at: new Date().toISOString() })
+        .update({ deleted_at: new Date().toISOString() })
         .eq('id', id)
     if(error) throw error;
 };
