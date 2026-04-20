@@ -3,15 +3,16 @@ import { supabase } from "../lib/supabaseClient";
 export const accountService = {
     getProfile: async () => {
         const { data: { user } } = await supabase.auth.getUser();
+
         if (!user) throw new Error("No hay sesión activa");
 
-        const { data, error } = await supabase
+        const { data: profile, error } = await supabase
             .from('profiles')
-            .select('*')
+            .select('full_name, phone_number')
             .eq('id', user.id)
             .single();
 
-        return { user, profile: data, error};
+        return { user, profile, error};
     },
 
     updateAccount: async (userId: string, updates: any, authUpdates?: { email?: string; password?:string}) => {
@@ -27,4 +28,13 @@ export const accountService = {
             if(authError) throw authError;
         };
     },
+
+    updateEmail : async (newEmail: string) => {
+        const {data, error } = await supabase.auth.updateUser({
+            email: newEmail
+        });
+
+        if(error) throw error;
+        return data;
+    }
 }
