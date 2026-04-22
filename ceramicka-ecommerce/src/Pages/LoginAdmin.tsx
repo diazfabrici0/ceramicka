@@ -23,10 +23,12 @@ export const LoginAdmin = () =>{
     }
 
     return (
-        <form onSubmit={handleLogin}>
-       <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} className='bg-red-200'/>
-       <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} className='bg-red-100'/>
-       <button type="submit" className='bg-green-200'>Entrar</button>
-    </form>
+        <div>
+            <form onSubmit={handleLogin}>
+                <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} className='bg-red-200'/>
+                <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} className='bg-red-100'/>
+                <button type="submit" className='bg-green-200'>Entrar</button>
+            </form>
+        </div>
     );
 };
