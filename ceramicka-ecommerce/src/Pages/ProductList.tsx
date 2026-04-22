@@ -5,7 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 
 export const ProductList = () => {
     const [products, setProducts] = useState<any[]>([]);
-    const [loadingProducts, setLoadingProducts] = useState(true);
+    //const [loadingProducts, setLoadingProducts] = useState(true);
     const [editingProduct, setEditingProduct] = useState<any | null>(null);
     const [isSaving, setIsSaving] = useState(false);
     const { user, loading } = useAuth();
@@ -21,7 +21,7 @@ export const ProductList = () => {
     const fetchProducts = async () => {
         const data = await getProducts();
         setProducts(data);
-        setLoadingProducts(false);
+        //setLoadingProducts(false);
     }
 
     useEffect(() => {
