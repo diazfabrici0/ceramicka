@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import { RootLayout } from "../layouts/RootLayout";
-import { HomePage, Stock, LoginAdmin, Account, AdminPanel, ProductList } from "../Pages";
+import { HomePage, Stock, LoginAdmin, Account, AdminPanel, ProductList, ResetPassword } from "../Pages";
 import { Product } from "../components/shared/product/Product";
 
 export const router = createBrowserRouter([
@@ -35,6 +35,10 @@ export const router = createBrowserRouter([
         {
             path:'productList',
             element:<ProductList />
+        },
+        {
+            path:'reset-password',
+            element:<ResetPassword />
         },
         ]
     }
