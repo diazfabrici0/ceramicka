@@ -7,9 +7,10 @@ import { useAuth } from '../../context/AuthContext'
 
 
 export const Navbar = () => {
-    const { isAuthenticated, user, logout } = useAuth();
+    const { isAuthenticated, isRecovering, user, logout } = useAuth();
 
     const adminIintial = user?.email?.charAt(0).toUpperCase() || "A";
+
     return (
         <header className='bg-white text-black py-4 flex items-center justify-between px-5 border-b border-slate-200 lg:px-12'>
             <Logos />
@@ -26,9 +27,10 @@ export const Navbar = () => {
                         >
                             {link.title}
                         </NavLink>
-                    ))}
+                    ))
+                }
 
-                {isAuthenticated && (
+                {isAuthenticated && !isRecovering && (
                     <>
                         <NavLink
                             to="/adminPanel"
@@ -52,7 +54,7 @@ export const Navbar = () => {
                 </button>
 
                 <div className='relative flex items-center gap-4'>
-                    {isAuthenticated ? (
+                    {isAuthenticated && !isRecovering ? (
                         <div className='flex items-center gap-3'>
                             <Link to="/account" className="w-8 h-8 bg-[#f880b8] text-white rounded-full flex items-center justify-center font-bold text-xs">
                                 {adminIintial}
@@ -77,5 +79,5 @@ export const Navbar = () => {
                 </button>
             </div>
         </header>
-    )
+)
 }

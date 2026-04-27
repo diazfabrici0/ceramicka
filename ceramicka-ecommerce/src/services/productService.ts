@@ -44,7 +44,7 @@ export const getProducts = async (limit: number | null = null): Promise<Product[
 export const getProdductById = async (id: number | string) => {
     const { data, error } = await supabase
         .from('product')
-        .select('*')
+        .select('*, category ( name )')
         .eq('id', id)
         .is('deleted_at', null)
         .gt('stock', 0)

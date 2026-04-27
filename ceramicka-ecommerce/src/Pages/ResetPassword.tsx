@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
+import { useAuth } from '../context/AuthContext';
 
 export const ResetPassword = () => {
     const [password, setPassword] = useState('');
@@ -9,6 +10,7 @@ export const ResetPassword = () => {
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const navigate = useNavigate();
+    const { setRecovering } = useAuth();
 
     const handleReset = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -36,9 +38,11 @@ export const ResetPassword = () => {
             setError(resetError.message);
         } else {
             setSuccess(true);
+            await supabase.auth.signOut();
+            setRecovering(false);
             setTimeout(() => {
                 navigate('/loginAdmin');
-            }, 3000);
+            }, 2000);
         }
     }
 
@@ -55,7 +59,7 @@ export const ResetPassword = () => {
 
                 {success && (
                     <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded text-green-600 text-sm">
-                        Contraseña actualizada correctamente. Redirigiendo al login...
+                        Contraseña actualizada. Serás redirigido al login...
                     </div>
                 )}
 

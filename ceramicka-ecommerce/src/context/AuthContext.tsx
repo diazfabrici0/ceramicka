@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useContext, type ReactNode } from "react";
+import { createContext, useState, useEffect, useContext, useRef, type ReactNode } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { type User } from "@supabase/supabase-js";
 
@@ -16,22 +16,25 @@ export const AuthProvider = ({ children }: { children: ReactNode}) => {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
     const [isRecovering, setRecovering] = useState(false);
+    const isRecoveringRef = useRef(false);
 
     useEffect(() =>{
-        // Cargar sesión inicial
         supabase.auth.getSession().then(({ data: { session } }) => {
             setUser(session?.user ?? null);
             setLoading(false);
         });
 
-        // Detectar PASSWORD_RECOVERY para activar modo recuperación
         const { data: { subscription} } = supabase.auth.onAuthStateChange((event, session) => {
             if (event === 'PASSWORD_RECOVERY') {
                 setRecovering(true);
+                isRecoveringRef.current = true;
                 setUser(session?.user ?? null);
             } else {
                 setUser(session?.user ?? null);
-                if (isRecovering) setRecovering(false);
+                if (isRecoveringRef.current) {
+                    setRecovering(false);
+                    isRecoveringRef.current = false;
+                }
             }
         });
 
@@ -41,12 +44,13 @@ export const AuthProvider = ({ children }: { children: ReactNode}) => {
     const logout = async () => {
         await supabase.auth.signOut();
         setRecovering(false);
+        isRecoveringRef.current = false;
     }
 
-    const isAuthenticated = !!user;
+    const isAuthenticated = !!user && !isRecovering;
 
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated, isRecovering: isRecovering, logout, setRecovering: setRecovering }}>
+        <AuthContext.Provider value={{ user, isAuthenticated, isRecovering, logout, setRecovering }}>
             {!loading && children}
         </AuthContext.Provider>
     );
