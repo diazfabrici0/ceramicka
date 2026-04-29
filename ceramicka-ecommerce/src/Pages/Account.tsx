@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
 import { accountService } from '../services/authAccountService';
+import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 export const Account = () => {
-  const [loading, setLoading] = useState(true);
+  const [load, setLoad] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { user, loading } = useAuth();
+  const navigate = useNavigate();
   const [profile, setProfile] = useState({
     full_name: '',
     phone_number: '',
@@ -12,8 +16,11 @@ export const Account = () => {
   });
 
   useEffect(() => {
+    if(!loading && !user) {
+      navigate('/loginAdmin');
+    }
     fetchData();
-  }, []);
+  }, [user, loading, navigate]);
 
   const fetchData = async () => {
     try {
@@ -26,13 +33,13 @@ export const Account = () => {
     } catch (error) {
       console.error("Error cargando perfil", error);
     } finally {
-      setLoading(false);
+      setLoad(false);
     }
   };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setLoad(true);
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
@@ -54,11 +61,11 @@ export const Account = () => {
     } catch (error: any) {
       alert(error.message);
     } finally {
-      setLoading(false);
+      setLoad(false);
     }
   };
 
-  if (loading) return <p>Cargando datos de cuenta...</p>;
+  if (load) return <p>Cargando datos de cuenta...</p>;
 
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow">
