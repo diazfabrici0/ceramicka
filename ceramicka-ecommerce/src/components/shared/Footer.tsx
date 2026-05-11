@@ -6,6 +6,7 @@ export const Footer = () => {
     return (
         <footer className="py-16 bg-[#f880b8] px-12 flex justify-between gap-10 text-sm text-slate-200 flex-wrap
         md:flex-nowrap">
+            
             <Link to="/" className={`text-2xl font-bold tracking-tighter transition-all text-white flex-1`}>
                 <p className="hidden lg:block">Cera</p>
                 <span className="text-[#9c3c69]">Micka</span>
@@ -37,7 +38,7 @@ export const Footer = () => {
             </div>
             <div className="flex flex-col gap-4 flex-1">
                 <p className="font-semibold uppercase tracking-tighter">
-                    Seguinos
+                    Seguime!
                 </p>
                 <p className="text-xs leading-6">
                     No te pierdas las nuevas piezas!
