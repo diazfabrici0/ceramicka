@@ -1,7 +1,7 @@
 //import { href } from "react-router-dom";
 
 //import { title } from "process"
-import { FaInstagram } from "react-icons/fa6"
+import { FaInstagram, FaWhatsapp } from "react-icons/fa6"
 
 export const navbarLinks = [
     {
@@ -18,16 +18,16 @@ export const navbarLinks = [
 
 export const socialLinks = [
     {
-        id: 1, 
+        id: 1,
         title: "Instagram",
         href: "https://www.instagram.com/c.eramicka/",
         icon: <FaInstagram size={20} />
     },
     {
-        id: 2, 
+        id: 2,
         title: "Whatsapp",
         href: "https://wa.me/5492995774749",
-        icon: <FaInstagram size={20} />
+        icon: <FaWhatsapp size={20} />
     }
 
 ]

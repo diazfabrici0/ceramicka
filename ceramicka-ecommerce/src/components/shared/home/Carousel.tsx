@@ -33,7 +33,7 @@ const Carousel = ({ data }: { data: CarouselItem[] }) => {
         if (!isPaused && data.length > 1) {
             interval = setInterval(() => {
                 nextSlide();
-            }, 4000);
+            }, 3000);
         }
 
         return () => clearInterval(interval);
@@ -135,7 +135,7 @@ const Carousel = ({ data }: { data: CarouselItem[] }) => {
                                 src={item.url}
                                 alt={item.name}
                                 className="object-cover rounded-lg shadow-2xl"
-                                style={{ width: '180px', height: '240px' }}
+                                style={{ width: '180px', height: '200px' }}
                             />
                             {offset === 0 && (
                                 <div className="mt-4 text-center">

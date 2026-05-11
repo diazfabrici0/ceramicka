@@ -39,7 +39,7 @@ export function CategoriesForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="p-6 border rounded-lg shadow-sm bg-white max-w-md mx-auto">
+        <form onSubmit={handleSubmit} className="p-6 border rounded-2xl shadow-sm bg-white max-w-md mx-auto">
             <h2 className="text-2xl font-bold mb-6 text-gray-800">Nueva Categoría</h2>
 
             <div className="mb-4">
@@ -49,7 +49,7 @@ export function CategoriesForm() {
                     placeholder="Ej: Jarrones de cerámica"
                     value={name}
                     onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                    className="w-full p-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#f880b8] outline-none"
                     required
                 />
             </div>
@@ -60,15 +60,15 @@ export function CategoriesForm() {
                     placeholder="Breve descripción de la categoría..."
                     value={description}
                     onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none h-32"
+                    className="w-full p-2 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#f880b8] outline-none h-32"
                 />
             </div>
 
             <button
                 type="submit"
                 disabled={loading}
-                className={`w-full py-2 px-4 rounded font-semibold text-white transition-colors 
-            ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'}`}
+                className={`w-full py-2 px-4 rounded-full font-semibold text-white transition-all
+            ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#f880b8] hover:bg-[#e0609a]'}`}
             >
                 {loading ? 'Guardando...' : 'Crear Categoría'}
             </button>

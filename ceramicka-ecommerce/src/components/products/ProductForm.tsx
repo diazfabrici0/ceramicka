@@ -93,47 +93,45 @@ export function ProductsForm() {
   };
 
   return(
-    <form onSubmit={handleSubmit} className='p-6 border rounded-lg shadow-sm bg-white max-w-md mx-auto'>
+    <form onSubmit={handleSubmit} className='p-6 border rounded-2xl shadow-sm bg-white max-w-md mx-auto'>
       <h2 className='text-2xl font-bold mb-4 text-gray-800'>
-        Subir un producto
+        Nuevo Producto
       </h2>
 
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-        <input 
+        <input
           type='text'
           placeholder='Maceta cactus'
           value={name}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-          className='w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-pink-500 outline-none'
+          className='w-full p-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#f880b8] outline-none'
           required
         />
       </div>
 
       <div className="flex gap-4 mb-4">
-        {/* Campo de Precio */}
         <div className="flex-1">
           <label className="block text-sm font-medium text-gray-700 mb-1">Precio</label>
-          <input 
+          <input
             type='number'
             placeholder='10000'
             value={price}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setPrice(e.target.value)}
-            className='w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-pink-500 outline-none'
+            className='w-full p-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#f880b8] outline-none'
             required
           />
         </div>
 
-        {/* 4. Nuevo Input de Stock */}
         <div className="w-32">
           <label className="block text-sm font-medium text-gray-700 mb-1">Stock</label>
-          <input 
+          <input
             type='number'
             min="0"
             placeholder='1'
             value={stock}
             onChange={(e: ChangeEvent<HTMLInputElement>) => setStock(e.target.value)}
-            className='w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-pink-500 outline-none'
+            className='w-full p-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#f880b8] outline-none'
             required
           />
         </div>
@@ -145,16 +143,16 @@ export function ProductsForm() {
           placeholder="Breve descripción de la pieza..."
           value={description}
           onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-pink-500 outline-none h-32"
+          className="w-full p-2 border border-gray-300 rounded-2xl focus:ring-2 focus:ring-[#f880b8] outline-none h-32"
         />
       </div>
 
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700 mb-1">Categoría</label>
-        <select 
-          value={categoryId} 
+        <select
+          value={categoryId}
           onChange={(e: ChangeEvent<HTMLSelectElement>) => setCategoryId(e.target.value)}
-          className='w-full p-2 border border-gray-300 rounded outline-none focus:ring-2 focus:ring-pink-500'
+          className='w-full p-2 border border-gray-300 rounded-full outline-none focus:ring-2 focus:ring-[#f880b8]'
           required
         >
           <option value="">Selecciona una categoría</option>
@@ -168,19 +166,19 @@ export function ProductsForm() {
 
       <div className="mb-6">
         <label className="block text-sm font-medium text-gray-700 mb-1">Imagen</label>
-        <input 
+        <input
           type="file"
           accept='image/*'
           onChange={(e: ChangeEvent<HTMLInputElement>) => setImages(e.target.files?.[0] || null)}
-          className='w-full text-sm'
+          className='w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#f880b8] file:text-white hover:file:bg-[#e0609a]'
           required
         />
       </div>
 
-      <button 
-        type="submit" 
-        disabled={loading} 
-        className="w-full bg-pink-500 hover:bg-pink-600 text-white p-2 rounded transition-colors disabled:bg-gray-400"
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full bg-[#f880b8] hover:bg-[#e0609a] text-white p-2 rounded-full transition-all disabled:bg-gray-400"
       >
         {loading ? 'Subiendo...' : 'Crear Producto'}
       </button>
