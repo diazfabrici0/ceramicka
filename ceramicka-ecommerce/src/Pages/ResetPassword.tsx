@@ -47,29 +47,29 @@ export const ResetPassword = () => {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
-            <form onSubmit={handleReset} className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-                <h1 className="text-2xl font-bold mb-6 text-gray-800">Nueva Contraseña</h1>
-                
+        <div className="min-h-screen w-full flex items-center justify-center bg-gray-50 p-4">
+            <form onSubmit={handleReset} className="bg-white p-6 md:p-8 rounded-2xl shadow-md w-full max-w-md">
+                <h1 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-800 text-center">Nueva Contraseña</h1>
+
                 {error && (
-                    <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-red-600 text-sm">
+                    <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-full text-red-600 text-sm text-center">
                         {error}
                     </div>
                 )}
 
                 {success && (
-                    <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded text-green-600 text-sm">
+                    <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-full text-green-600 text-sm text-center">
                         Contraseña actualizada. Serás redirigido al login...
                     </div>
                 )}
 
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-1">Nueva Contraseña</label>
-                    <input 
-                        type="password" 
+                    <input
+                        type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="w-full p-3 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#f880b8] outline-none"
                         required
                         minLength={6}
                     />
@@ -77,20 +77,20 @@ export const ResetPassword = () => {
 
                 <div className="mb-6">
                     <label className="block text-sm font-medium text-gray-700 mb-1">Confirmar Contraseña</label>
-                    <input 
-                        type="password" 
+                    <input
+                        type="password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none"
+                        className="w-full p-3 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#f880b8] outline-none"
                         required
                         minLength={6}
                     />
                 </div>
 
-                <button 
-                    type="submit" 
+                <button
+                    type="submit"
                     disabled={loading || success}
-                    className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:bg-gray-400"
+                    className="w-full bg-[#f880b8] text-white py-3 rounded-full hover:bg-[#e0609a] transition-all disabled:bg-gray-400"
                 >
                     {loading ? 'Cambiando...' : 'Cambiar Contraseña'}
                 </button>

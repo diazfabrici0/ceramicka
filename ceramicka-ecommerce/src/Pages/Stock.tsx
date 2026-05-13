@@ -58,17 +58,19 @@ export const Stock = () => {
         setFilteredProducts(sorted);
     };
 
-    if (loading) return <p className="text-center mt-10">Cargando catálogo...</p>;
+    if (loading) return <div className="text-center py-20"><p className="text-gray-600">Cargando catálogo...</p></div>;
 
     return (
-        <div className="w-screen px-4 md:px-10">
-            <ProductFilters 
-                onSortChange={handleSort} 
+        <div className="w-screen px-4 md:px-10 py-6 bg-[url(../../../img/patron.jpg)] bg-repeat bg-contain">
+            <ProductFilters
+                onSortChange={handleSort}
                 onCategoryChange={setSelectedCategory}
-                categories={categories} // Pasamos el array de objetos Category
+                categories={categories}
                 selectedCategory={selectedCategory}
             />
-            <ProductGrid title="Stock disponible" products={filteredProducts}/>
+            <div className="">
+                <ProductGrid title="Stock disponible" products={filteredProducts}/>
+            </div>
         </div>
     );
 };

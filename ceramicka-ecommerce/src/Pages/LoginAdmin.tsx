@@ -54,19 +54,18 @@ export const LoginAdmin = () =>{
     }
 
     return (
-        <div className="min-h-screen w-screen flex items-center justify-center bg-gray-50">
-            
-            <form onSubmit={handleLogin} className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-                <h1 className="text-2xl font-bold mb-6 text-gray-800">Iniciar Sesión</h1>
+        <div className="min-h-screen w-screen flex items-center justify-center bg-gray-50 p-4">
+            <form onSubmit={handleLogin} className="bg-white p-6 md:p-8 rounded-2xl shadow-md w-full max-w-md">
+                <h1 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-800 text-center">Iniciar Sesión</h1>
 
                 {error && (
-                    <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-red-600 text-sm">
+                    <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-full text-red-600 text-sm text-center">
                         {error}
                     </div>
                 )}
 
                 {resetSent && (
-                    <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded text-green-600 text-sm">
+                    <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-full text-green-600 text-sm text-center">
                         Se ha enviado un correo de recuperación a tu email.
                     </div>
                 )}
@@ -77,7 +76,7 @@ export const LoginAdmin = () =>{
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full p-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#f880b8] outline-none"
+                        className="w-full p-3 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#f880b8] outline-none"
                         required
                     />
                 </div>
@@ -88,7 +87,7 @@ export const LoginAdmin = () =>{
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full p-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#f880b8] outline-none"
+                        className="w-full p-3 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#f880b8] outline-none"
                         required
                     />
                 </div>
@@ -96,7 +95,7 @@ export const LoginAdmin = () =>{
                 <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-[#f880b8] text-white py-2 rounded-full hover:bg-[#e0609a] transition-all disabled:bg-gray-400"
+                    className="w-full bg-[#f880b8] text-white py-3 rounded-full hover:bg-[#e0609a] transition-all disabled:bg-gray-400"
                 >
                     {loading ? 'Cargando...' : 'Entrar'}
                 </button>
@@ -108,7 +107,7 @@ export const LoginAdmin = () =>{
                         disabled={loading}
                         className="text-sm text-[#f880b8] hover:text-[#e0609a] hover:underline"
                     >
-                        ¿Olvidaste tu contraseña? Has click aquí para recuperarla
+                        ¿Olvidaste tu contraseña?
                     </button>
                 </div>
             </form>

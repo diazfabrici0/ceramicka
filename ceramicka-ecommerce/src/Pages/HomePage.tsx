@@ -12,10 +12,10 @@ export const HomePage = () => {
         const fetchAllProducts = async () => {
             try {
                 setLoading(true);
-                const data = await getProducts(4); // <--- Aquí invocas la función
+                const data = await getProducts(4);
                 setProducts(data || []);
             } catch (error) {
-                return <p>Error obteniendo los productos</p> 
+                return <p>Error obteniendo los productos</p>
             } finally {
                 setLoading(false);
             }
@@ -24,16 +24,13 @@ export const HomePage = () => {
         fetchAllProducts();
     }, []);
 
-    if (loading) return <p>Cargando...</p>;
+    if (loading) return <div className="text-center py-20"><p>Cargando...</p></div>;
 
     return (
         <div className="w-screen">
-            {/* <FeatureGrid /> */}
-
-            {/* Mostramos los productos reales traídos de Supabase */}
             <ProductGrid
-                title="Nuevas Piezas!"
-                products={products} 
+                title="¡Nuevas Piezas!"
+                products={products}
             />
         </div>
     );

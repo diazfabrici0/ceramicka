@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react"
 import { getProducts, updateProduct, deleteProduct } from "../services/productService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { FiEdit2, FiTrash2, FiPlus, FiSearch } from "react-icons/fi";
 
 export const ProductList = () => {
     const [products, setProducts] = useState<any[]>([]);
-    //const [loadingProducts, setLoadingProducts] = useState(true);
     const [editingProduct, setEditingProduct] = useState<any | null>(null);
     const [isSaving, setIsSaving] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
     const { user, loading } = useAuth();
     const navigate = useNavigate();
 
@@ -65,50 +66,95 @@ export const ProductList = () => {
 
     if (loading) return <p className="p-4 text-pink-500">Cargando productos...</p>
 
-   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4 text-[#f880b8]">Panel de Administración</h1>
+    const filteredProducts = products.filter(p =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+return (
+     <div className="p-4 md:p-6 w-screen bg-[url(../../../img/patron.jpg)] bg-repeat bg-contain h-screen">
+       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+         <h1 className="text-xl md:text-2xl font-bold text-[#f880b8]">Panel de Administración</h1>
+         <Link
+           to="/adminPanel"
+           className="flex items-center gap-2 bg-[#f880b8] hover:bg-[#e0609a] text-white px-4 py-2 rounded-full transition-all text-sm font-medium"
+         >
+           <FiPlus size={18} />
+           <span>Crear Producto o Categoría</span>
+         </Link>
+       </div>
+
+       {/* Barra de búsqueda */}
+       <div className="mb-4 bg-white">
+         <div className="relative">
+           <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+           <input
+             type="text"
+             placeholder="Buscar productos por nombre..."
+             value={searchQuery}
+             onChange={(e) => setSearchQuery(e.target.value)}
+             className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:ring-2 focus:ring-[#f880b8] outline-none text-sm"
+           />
+         </div>
+       </div>
       
       {/* Tabla de Productos */}
-      <div className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200">
-        <table className="min-w-full text-sm text-left">
-          <thead className="bg-gray-100 text-gray-700 uppercase font-semibold">
-            <tr>
-              <th className="px-6 py-3">Producto</th>
-              <th className="px-6 py-3">Precio</th>
-              <th className="px-6 py-3">Stock</th>
-              <th className="px-6 py-3 text-center">Acciones</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-200">
-            {products.map((p) => (
-              <tr key={p.id} className="hover:bg-gray-50 transition-colors">
-                <td className="px-6 py-4 font-medium text-gray-900">{p.name}</td>
-                <td className="px-6 py-4">${p.price}</td>
-                <td className="px-6 py-4">
-                    <span className={`px-2 py-1 rounded-full text-xs ${p.stock > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                        {p.stock > 0 ? `En stock: ${p.stock}` : 'Agotado'}
-                    </span>
-                </td>
-                <td className="px-6 py-4 flex justify-center gap-3">
-                  <button 
-                    onClick={() => setEditingProduct(p)}
-                    className="text-blue-600 hover:underline font-medium"
-                  >
-                    Editar
-                  </button>
-                  <button 
-                    onClick={() => { if(confirm("¿Eliminar?")) handleDelete(p.id).then(fetchProducts) }}
-                    className="text-red-600 hover:underline font-medium"
-                  >
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+<div className="bg-white shadow-md rounded-lg border border-gray-200 overflow-x-auto">
+  <table className="min-w-full text-sm text-left table-auto">
+    <thead className="bg-gray-100 text-gray-700 uppercase font-semibold">
+      <tr>
+        {/* Reduje px-6 a px-3 en móvil, se mantiene px-6 en escritorio */}
+        <th className="px-3 md:px-6 py-3">Producto</th>
+        <th className="px-3 md:px-6 py-3 text-right md:text-left">Precio</th>
+        <th className="px-3 md:px-6 py-3 text-center">Stock</th>
+        <th className="px-3 md:px-6 py-3 text-center">Acciones</th>
+      </tr>
+    </thead>
+    <tbody className="divide-y divide-gray-200">
+      {filteredProducts.length > 0 ? filteredProducts.map((p) => (
+        <tr key={p.id} className="hover:bg-gray-50 transition-colors">
+          <td className="px-3 md:px-6 py-4 font-medium text-gray-900 break-words max-w-[100px] md:max-w-none">
+            {p.name}
+          </td>
+          <td className="px-3 md:px-6 py-4 text-right md:text-left">
+            ${p.price}
+          </td>
+          <td className="px-3 md:px-6 py-4 text-center">
+            <span className={`inline-block px-2 py-1 rounded-full text-[10px] md:text-xs font-bold ${p.stock > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                {p.stock > 0 ? p.stock : '0'}
+            </span>
+          </td>
+          {/* Columna Acciones: quitamos el flex que rompe tablas y usamos whitespace-nowrap */}
+          <td className="px-3 md:px-6 py-4 text-center whitespace-nowrap">
+            <div className="flex justify-center gap-3">
+                <button
+                onClick={() => setEditingProduct(p)}
+                className="text-blue-600 hover:text-blue-800 transition-colors"
+                title="Editar"
+                >
+                <FiEdit2 size={18} />
+                <span className="hidden md:inline ml-1 hover:underline font-medium">Editar</span>
+                </button>
+                <button
+                onClick={() => { if(confirm("¿Eliminar?")) handleDelete(p.id).then(fetchProducts) }}
+                className="text-red-600 hover:text-red-800 transition-colors"
+                title="Eliminar"
+                >
+                <FiTrash2 size={18} />
+                <span className="hidden md:inline ml-1 hover:underline font-medium">Eliminar</span>
+                </button>
+            </div>
+          </td>
+        </tr>
+      )) : (
+        <tr>
+          <td colSpan={4} className="px-6 py-8 text-center text-gray-500">
+            {searchQuery ? `No hay resultados` : 'Sin productos'}
+          </td>
+        </tr>
+      )}
+    </tbody>
+  </table>
+</div>
 
       {/* MODAL DE EDICIÓN */}
       {editingProduct && (

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { navbarLinks } from '../../constants/links'
 import { NavLink, Link, useNavigate } from 'react-router-dom'
-import { HiOutlineSearch } from 'react-icons/hi'
+import { HiOutlineSearch, HiX } from 'react-icons/hi'
 import { FaBarsStaggered } from 'react-icons/fa6'
 import { Logos } from './Logos'
 import { useAuth } from '../../context/AuthContext'
@@ -11,6 +11,7 @@ import { getProducts, type Product } from '../../services/productService'
 export const Navbar = () => {
     const { isAuthenticated, isRecovering, user, logout } = useAuth();
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
@@ -71,18 +72,27 @@ export const Navbar = () => {
         navigate(`/product/${productId}`);
     };
 
+    const handleLinkClick = () => {
+        setIsMenuOpen(false);
+    };
+
+    const handleLogout = async () => {
+        setIsMenuOpen(false);
+        await logout();
+        navigate('/');
+    };
+
     return (
-        <header className='bg-white text-black py-4 flex items-center justify-between px-5 border-b border-slate-200 lg:px-12'>
+        <header className='bg-white text-black py-3 md:py-4 flex items-center justify-between px-4 md:px-5 border-b border-slate-200 lg:px-12 relative'>
             <Logos />
 
-            <nav className='space-x-5 hiddem md:flex'>
+            <nav className={`hidden lg:flex space-x-5`}>
                 {
                     navbarLinks.map(link => (
                         <NavLink
                             key={link.id}
                             to={link.href}
-                            className={({ isActive }) => `${isActive ? 'text-[#f880b8] ' : ''} transition-all duration-300 font-medium hover:text-[#f880b8]
-                    `
+                            className={({ isActive }) => `${isActive ? 'text-[#f880b8] ' : ''} transition-all duration-300 font-medium hover:text-[#f880b8]`
                             }
                         >
                             {link.title}
@@ -92,27 +102,23 @@ export const Navbar = () => {
 
                 {isAuthenticated && !isRecovering && (
                     <>
-                        <NavLink
-                            to="/adminPanel"
-                            className={({ isActive }) => `${isActive ? 'text-[#f880b8] underline' : ''} transition-all duration-300 font-medium hover:text-[#f880b8]`}
-                        >
-                            Panel Admin
-                        </NavLink>
+
                         <NavLink
                             to="/productList"
-                            className={({ isActive }) => `${isActive ? 'text-[#f880b8] underline' : ''} transition-all duration-300 font-medium hover:text-[#f880b8]`}
+                            className={({ isActive }) => `${isActive ? 'text-[#f880b8] underline-none' : ''} transition-all duration-300 font-medium hover:text-[#f880b8]`}
                         >
-                            Lista de productos
+                            Inventario
                         </NavLink>
                     </>
 
                 )}
             </nav>
-            <div className="flex gap-5 items-center">
+
+            <div className="flex gap-3 md:gap-5 items-center">
                 <div ref={searchRef} className="relative flex items-center">
                     <div
                         className={`flex items-center gap-2 overflow-hidden transition-all duration-300 ease-out origin-right ${
-                            isSearchOpen ? 'w-48 md:w-64 opacity-100' : 'w-0 opacity-0'
+                            isSearchOpen ? 'w-40 md:w-64 opacity-100' : 'w-0 opacity-0'
                         }`}
                     >
                         <input
@@ -120,7 +126,7 @@ export const Navbar = () => {
                             type="text"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            placeholder="Buscar productos..."
+                            placeholder="Buscar..."
                             className="w-full p-2 border border-[#f880b8] rounded-full outline-none text-sm"
                         />
                     </div>
@@ -144,7 +150,7 @@ export const Navbar = () => {
                     )}
 
                     {isSearchOpen && searchQuery.length >= 2 && (
-                        <div className="absolute top-full left-0 mt-2 w-full md:w-80 bg-white rounded-lg shadow-lg border border-gray-200 max-h-80 overflow-y-auto z-50 animate-fadeIn">
+                        <div className="absolute top-full left-0 mt-2 w-72 md:w-80 bg-white rounded-lg shadow-lg border border-gray-200 max-h-80 overflow-y-auto z-50 animate-fadeIn">
                             {loading ? (
                                 <div className="p-4 text-center text-gray-500 text-sm">
                                     Buscando...
@@ -178,30 +184,82 @@ export const Navbar = () => {
                     )}
                 </div>
 
-                <div className='relative flex items-center gap-4'>
+                <div className='relative flex items-center gap-2 md:gap-4'>
                     {isAuthenticated && !isRecovering ? (
-                        <div className='flex items-center gap-3'>
+                        <div className='flex items-center gap-2 md:gap-3'>
                             <Link to="/account" className="w-8 h-8 bg-[#f880b8] text-white rounded-full flex items-center justify-center font-bold text-xs">
                                 {adminIintial}
                             </Link>
                             <button onClick={logout}
-                                className='text-xs text-gray-500 hover:text-red-500 font-medium'>
+                                className='text-xs text-gray-500 hover:text-red-500 font-medium hidden md:block'>
                                 Salir
                             </button>
                         </div>
                     ) : (
                         <Link
                             to="/loginAdmin"
-                            className="text-sm font-medium hover:text-[#f880b8] transition-colors"
+                            className="text-sm font-medium hover:text-[#f880b8] transition-colors hidden md:block"
                         >
                             Acceder
                         </Link>
                     )}
                 </div>
 
-                <button className="md:hidden">
-                    <FaBarsStaggered size={20} color="#f880b8" />
+                <button
+                    className="lg:hidden p-1"
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                >
+                    {isMenuOpen ? (
+                        <HiX size={24} color="#f880b8" />
+                    ) : (
+                        <FaBarsStaggered size={20} color="#f880b8" />
+                    )}
                 </button>
+            </div>
+
+            <div className={`lg:hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-lg transition-all duration-300 ease-in-out z-40 ${
+                isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
+            }`}>
+                <div className="flex flex-col p-4 space-y-3">
+                    {navbarLinks.map(link => (
+                        <NavLink
+                            key={link.id}
+                            to={link.href}
+                            onClick={handleLinkClick}
+                            className={({ isActive }) => `${isActive ? 'text-[#f880b8] font-semibold' : ''} text-base font-medium hover:text-[#f880b8] transition-colors py-2 border-b border-gray-100`}
+                        >
+                            {link.title}
+                        </NavLink>
+                    ))}
+
+                    {isAuthenticated && !isRecovering && (
+                        <>
+                            <NavLink
+                                to="/productList"
+                                onClick={handleLinkClick}
+                                className={({ isActive }) => `${isActive ? 'text-[#f880b8] font-semibold' : ''} text-base font-medium hover:text-[#f880b8] transition-colors py-2 border-b border-gray-100`}
+                            >
+                                Inventario
+                            </NavLink>
+                            <button
+                                onClick={handleLogout}
+                                className="text-left text-base font-medium text-gray-500 hover:text-red-500 transition-colors py-2"
+                            >
+                                Salir
+                            </button>
+                        </>
+                    )}
+
+                    {!isAuthenticated && (
+                        <NavLink
+                            to="/loginAdmin"
+                            onClick={handleLinkClick}
+                            className="text-base font-medium hover:text-[#f880b8] transition-colors py-2 border-b border-gray-100"
+                        >
+                            Acceder
+                        </NavLink>
+                    )}
+                </div>
             </div>
         </header>
     )

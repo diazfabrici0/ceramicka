@@ -5,6 +5,10 @@ import { Banner } from "../components/shared/home/Banner";
 import { Newsletter } from "../components/shared/home/Newsletter";
 
 export const RootLayout = () => {
+    const location = useLocation();
+
+    const excludeRoutes = ['/adminPanel', '/loginAdmin', '/productList', '/account'];
+    const showFooter = !excludeRoutes.includes(location.pathname);
 
     const { pathname } = useLocation();
 
@@ -16,13 +20,13 @@ export const RootLayout = () => {
 
             {pathname === "/" &&  <Banner />}
 
-            <main className="container my-8 flex-1">
+            <main className="container mt-4 flex-1">
                 <Outlet />
             </main>
             
             {pathname === "/" &&  <Newsletter />}
 
-            <Footer />
+            {showFooter && <Footer />}
         </div>
     )
 

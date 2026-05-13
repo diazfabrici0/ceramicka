@@ -6,12 +6,12 @@ import { FaInstagram, FaWhatsapp } from "react-icons/fa6"
 export const navbarLinks = [
     {
         id: 1,
-        title: "home",
+        title: "Inicio",
         href: "/",
     },
     {
         id: 2,
-        title: "stock",
+        title: "Productos",
         href: "/stock",
     },
 ]
