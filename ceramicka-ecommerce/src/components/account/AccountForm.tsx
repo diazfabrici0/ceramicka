@@ -25,7 +25,7 @@ export const Account = () => {
         email: user.email || ''
       });
     } catch (error) {
-      console.error("Error cargando perfil", error);
+      //console.error("Error cargando perfil", error);
     } finally {
       setLoading(false);
     }

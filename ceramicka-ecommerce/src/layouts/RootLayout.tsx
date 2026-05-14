@@ -12,7 +12,7 @@ export const RootLayout = () => {
 
     const { pathname } = useLocation();
 
-    console.log(pathname)
+    //console.log(pathname)
 
     return (
         <div className="h-screen flex flex-col">
