@@ -3,6 +3,7 @@ import { getProducts, updateProduct, deleteProduct } from "../services/productSe
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { FiEdit2, FiTrash2, FiPlus, FiSearch } from "react-icons/fi";
+import { GoBack } from "../components/shared/GoBack";
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
 
@@ -104,6 +105,9 @@ export const ProductList = () => {
 
 return (
      <div className="p-4 md:p-6 w-screen bg-[url(../../../img/patron.jpg)] bg-repeat bg-contain h-screen">
+       <div className="p-3">
+          <GoBack />
+       </div>
        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
          <h1 className="text-xl md:text-2xl font-bold text-[#f880b8]">Panel de Administración</h1>
          <Link

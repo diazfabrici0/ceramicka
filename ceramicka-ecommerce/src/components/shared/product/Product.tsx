@@ -4,6 +4,7 @@ import { getProdductById } from '../../../services/productService';
 import { getAdminPhone } from '../../../services/profileService';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
+import { GoBack } from '../../shared/GoBack';
 
 export const Product = () => {
     const { id } = useParams();
@@ -52,6 +53,7 @@ export const Product = () => {
 
     return (
         <div className="min-h-screen bg-white/50 flex items-center justify-center p-4 bg-[url(../../../img/patron.jpg)] bg-repeat bg-contain">
+            <GoBack />
             <div className="bg-white rounded-[40px] shadow-sm overflow-hidden max-w-5xl w-full flex flex-col md:flex-row items-center p-6 md:p-12 relative border border-pink-50">
                 
                 {/* Imagen Cuadrada */}

@@ -4,6 +4,7 @@ import { getProducts } from "../services/productService";
 import { getCategories } from "../services/categoryService";
 import type { Category } from "../services/categoryService"; // Importamos el servicio
 import { ProductFilters } from "../components/products/ProductFilters";
+import { GoBack } from "../components/shared/GoBack";
 
 export const Stock = () => {
     const [allProducts, setAllProducts] = useState<any[]>([]);
@@ -62,6 +63,7 @@ export const Stock = () => {
 
     return (
         <div className="w-screen px-4 md:px-10 py-6 bg-[url(../../../img/patron.jpg)] bg-repeat bg-contain">
+            <GoBack />
             <ProductFilters
                 onSortChange={handleSort}
                 onCategoryChange={setSelectedCategory}

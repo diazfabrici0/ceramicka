@@ -5,6 +5,7 @@ import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss';
+import { GoBack } from '../components/shared/GoBack';
 
 export const Account = () => {
   const [load, setLoad] = useState(true);
@@ -88,8 +89,9 @@ export const Account = () => {
 
 if (load) return <div className="text-center py-20"><p>Cargando datos de cuenta...</p></div>;
 
-  return (
+    return (
     <div className="w-screen bg-[url(../../../img/patron.jpg)] bg-repeat bg-contain h-screen">
+      <GoBack />
       <div className="max-w-md mx-auto p-4 md:p-6 bg-white rounded-2xl shadow-xl">
       <h2 className="text-xl md:text-2xl font-bold mb-4 text-center">Mi Cuenta</h2>
       <div className='mx-auto m-4 w-20 h-20 bg-[#f880b8] text-white rounded-full flex items-center justify-center font-thin text-3xl'>

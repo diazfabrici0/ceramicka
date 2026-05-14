@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
+import { GoBack } from '../components/shared/GoBack';
 
 export const LoginAdmin = () =>{
     const [email, setEmail] = useState('');
@@ -55,6 +56,7 @@ export const LoginAdmin = () =>{
 
     return (
         <div className="min-h-screen w-screen flex items-center justify-center bg-gray-50 p-4">
+            <GoBack />
             <form onSubmit={handleLogin} className="bg-white p-6 md:p-8 rounded-2xl shadow-md w-full max-w-md">
                 <h1 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-800 text-center">Iniciar Sesión</h1>
 

@@ -3,6 +3,7 @@ import { CategoriesForm } from "../components/categories/CategoriesForm";
 import { ProductsForm } from "../components/products/ProductForm";
 import { useAuth } from "../hooks/useAuth";
 import { useEffect } from "react";
+import { GoBack } from "../components/shared/GoBack";
 
 export const AdminPanel = () => {
     const { user, loading } = useAuth();
@@ -19,6 +20,7 @@ export const AdminPanel = () => {
     if(!user) return null;
     return (
         <div className="min-h-screen w-screen bg-white p-8 bg-[url(../../../img/patron.jpg)] bg-repeat bg-contain h-screen">
+            <GoBack />
             <header className="max-w-4xl mx-auto mb-10 text-left">
                 <h1 className="text-3xl font-bold text-[#f880b8]">Panel de Administración</h1>
                 <p className="text-gray-600">Gestiona las categorías y productos de tu tienda.</p>

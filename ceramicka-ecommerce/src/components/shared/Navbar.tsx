@@ -217,7 +217,7 @@ export const Navbar = () => {
                 </button>
             </div>
 
-            <div className={`lg:hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-lg transition-all duration-300 ease-in-out z-40 ${
+            <div className={`lg:hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-lg transition-all duration-300 ease-in-out z-50 ${
                 isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'
             }`}>
                 <div className="flex flex-col p-4 space-y-3">

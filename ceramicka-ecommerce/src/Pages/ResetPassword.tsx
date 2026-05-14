@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { useAuth } from '../context/AuthContext';
+import { GoBack } from '../components/shared/GoBack';
 
 export const ResetPassword = () => {
     const [password, setPassword] = useState('');
@@ -48,6 +49,7 @@ export const ResetPassword = () => {
 
     return (
         <div className="min-h-screen w-full flex items-center justify-center bg-gray-50 p-4">
+            <GoBack />
             <form onSubmit={handleReset} className="bg-white p-6 md:p-8 rounded-2xl shadow-md w-full max-w-md">
                 <h1 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-800 text-center">Nueva Contraseña</h1>
 
