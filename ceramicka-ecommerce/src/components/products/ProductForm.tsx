@@ -1,5 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent, useEffect } from 'react';
 import { supabase } from '../../lib/supabaseClient';
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss';
 
 interface Category {
   id: string,
@@ -57,7 +59,11 @@ export function ProductsForm() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!images || !categoryId) return alert("Por favor ingrese una imagen y una categoria");
+    if (!images || !categoryId) return Swal.fire({
+      icon: "warning",
+      title: "Datos incompletos!",
+      text: "Por favor ingrese una imagen y una categoria."
+    });
 
     setLoading(true);
 
@@ -77,9 +83,19 @@ export function ProductsForm() {
           } as Producto
         ]);
 
-      if (error) alert("Error" + error.message);
+      if (error) Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Ocurrio un error al subir el producto!",
+        });
       else {
-        alert("Producto creado!");
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Guardado con exito!",
+          showConfirmButton: false,
+          timer: 3000
+        });
         setName('');
         setDescription('');
         setPrice('');

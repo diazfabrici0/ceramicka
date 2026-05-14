@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getProdductById } from '../../../services/productService';
-import { getAdminPhone } from '../../../services/profileService'; // Importamos el nuevo servicio
+import { getAdminPhone } from '../../../services/profileService';
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss';
 
 export const Product = () => {
     const { id } = useParams();
@@ -27,17 +29,17 @@ export const Product = () => {
 
         const handleWhatsAppRedirect = () => {
         if (!producto || !adminPhone) {
-            alert("Lo sentimos, el número de contacto no está disponible.");
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Lo sentimos, el numero de contacto no esa disponible!",
+            });
             return;
         }
-        console.log("Teléfono cargado para el cliente:", adminPhone);
-        // 1. Limpiamos el número de cualquier caracter no numérico
         const cleanPhone = adminPhone.replace(/\D/g, '');
 
-        // 2. Obtenemos la URL actual del producto
         const productUrl = window.location.href;
 
-        // 3. Construimos el mensaje con el enlace incluido
         const message = `¡Hola! Me interesa comprar esta pieza: *${producto.name}*.\n\nAquí tienes el enlace del producto:\n${productUrl}`;
         
         const whatsappUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(message)}`;
@@ -49,7 +51,7 @@ export const Product = () => {
     if (!producto) return <p className="text-center mt-10 text-pink-300 animate-pulse">Cargando pieza única...</p>;
 
     return (
-        <div className="min-h-screen bg-white/50 flex items-center justify-center p-4">
+        <div className="min-h-screen bg-white/50 flex items-center justify-center p-4 bg-[url(../../../img/patron.jpg)] bg-repeat bg-contain">
             <div className="bg-white rounded-[40px] shadow-sm overflow-hidden max-w-5xl w-full flex flex-col md:flex-row items-center p-6 md:p-12 relative border border-pink-50">
                 
                 {/* Imagen Cuadrada */}

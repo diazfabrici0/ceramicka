@@ -19,19 +19,27 @@ export const Footer = () => {
                     ¡Enviame un mensaje!
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2">
-                    <div className="flex items-center gap-2 px-3 py-2 border border-gray-800 rounded-full flex-1">
-                        <input type="email" placeholder="Correo Electrónico"
-                        className="bg-transparent text-slate-200 w-full focus:outline-none text-sm" />
-                        <button className="text-slate-200">
-                            <BiChevronRight size={20} />
-                        </button>
+                    <div className="">
+                        <a href="mailto:mickaberoiza2@gmail.com" 
+                            className="flex items-center gap-2 px-3 py-2 border border-gray-800 rounded-full flex-1 hover:bg-gray-800/50 transition-colors cursor-pointer">
+                            <span className="text-slate-200 w-full text-sm">Correo Electrónico</span>
+                            <button className="text-slate-200">
+                                <BiChevronRight size={20} />
+                            </button>
+                        </a>   
                     </div>
-                    <div className="flex items-center gap-2 px-3 py-2 border border-gray-800 rounded-full flex-1">
-                        <input type="text" placeholder="WhatsApp"
-                        className="bg-transparent text-slate-200 w-full focus:outline-none text-sm" />
-                        <button className="text-slate-200">
-                            <BiChevronRight size={20} />
-                        </button>
+                    <div className="">
+                        <a href="https://wa.me/2995774749"
+                        target="blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 px-3 py-2 border border-gray-800 rounded-full flex-1 hover:bg-gray-800/50 transition-colors cursor-pointer" >
+                            <span className="text-slate-200 w-full text-sm">
+                                Whatsapp
+                            </span>
+                            <button className="text-slate-200">
+                                <BiChevronRight size={20} />
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>

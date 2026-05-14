@@ -3,6 +3,8 @@ import { getProducts, updateProduct, deleteProduct } from "../services/productSe
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { FiEdit2, FiTrash2, FiPlus, FiSearch } from "react-icons/fi";
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss';
 
 export const ProductList = () => {
     const [products, setProducts] = useState<any[]>([]);
@@ -50,19 +52,49 @@ export const ProductList = () => {
 
             setEditingProduct(null);
             fetchProducts();
-            alert("¡Producto actualizado con éxito!");
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Guardado con exito!",
+              showConfirmButton: false,
+              timer: 3000
+            });
         } catch (error) {
-            console.error("Error al guardar:", error);
-            alert ("Error al actualizar");
+            //console.error("Error al guardar:", error);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Ocurrio un error al guardar :(",
+            });
+        } finally {
+          setIsSaving(false);
         }
     };
 
     const handleDelete = async (id: number) => {
-        if(confirm("Estas seguro de eliminar este producto?")){
-            await deleteProduct(id);
-            fetchProducts();
+      const result = await Swal.fire({
+        title: "Seguro que quieres eliminar este producto?",
+        showDenyButton: true,
+        confirmButtonText: "Eliminar",
+        denyButtonText: `Cancelar`
+      });
+
+      if (result.isConfirmed) {
+        try {
+          await deleteProduct(id);
+          await fetchProducts();
+        } catch (error){
+          console.error(error);
+
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Ocurrio un error al eliminar el producto :(",
+        });
         }
-    }
+      }
+        
+      };
 
     if (loading) return <p className="p-4 text-pink-500">Cargando productos...</p>
 
@@ -98,50 +130,42 @@ return (
        </div>
       
       {/* Tabla de Productos */}
-<div className="bg-white shadow-md rounded-lg border border-gray-200 overflow-x-auto">
-  <table className="min-w-full text-sm text-left table-auto">
-    <thead className="bg-gray-100 text-gray-700 uppercase font-semibold">
-      <tr>
-        {/* Reduje px-6 a px-3 en móvil, se mantiene px-6 en escritorio */}
-        <th className="px-3 md:px-6 py-3">Producto</th>
-        <th className="px-3 md:px-6 py-3 text-right md:text-left">Precio</th>
-        <th className="px-3 md:px-6 py-3 text-center">Stock</th>
-        <th className="px-3 md:px-6 py-3 text-center">Acciones</th>
-      </tr>
-    </thead>
-    <tbody className="divide-y divide-gray-200">
+      <div className="bg-white shadow-md rounded-lg border border-gray-200 overflow-x-auto">
+        <table className="w-full text-sm text-center table-fixed">
+          <thead className="bg-gray-100 text-gray-700 uppercase font-semibold">
+            <tr>
+              <th className="px-2 md:px-6 py-3">Producto</th>
+              <th className="px-1 md:px-6 py-3">Precio</th>
+              <th className="px-1 md:px-6 py-3">Stock</th>
+              <th className="px-1 md:px-6 py-3 text-center">Acciones</th>
+            </tr>
+          </thead>
+<tbody className="divide-y divide-gray-200">
       {filteredProducts.length > 0 ? filteredProducts.map((p) => (
         <tr key={p.id} className="hover:bg-gray-50 transition-colors">
-          <td className="px-3 md:px-6 py-4 font-medium text-gray-900 break-words max-w-[100px] md:max-w-none">
-            {p.name}
-          </td>
-          <td className="px-3 md:px-6 py-4 text-right md:text-left">
-            ${p.price}
-          </td>
-          <td className="px-3 md:px-6 py-4 text-center">
-            <span className={`inline-block px-2 py-1 rounded-full text-[10px] md:text-xs font-bold ${p.stock > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
-                {p.stock > 0 ? p.stock : '0'}
+          <td className="text-left px-2 md:px-6 py-3 font-medium text-gray-900 min-w-[50px] max-w-[50px] whitespace-normal break-words">{p.name}</td>
+          <td className="px-1 md:px-6 py-3">${p.price}</td>
+          <td className="px-1 md:px-6 py-3 text-center">
+            <span className={`px-1 py-1 rounded-full text-xs ${p.stock > 0 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+              {p.stock > 0 ? p.stock : '0'}
             </span>
           </td>
-          {/* Columna Acciones: quitamos el flex que rompe tablas y usamos whitespace-nowrap */}
-          <td className="px-3 md:px-6 py-4 text-center whitespace-nowrap">
-            <div className="flex justify-center gap-3">
-                <button
+          <td className="px-1 md:px-6 py-3 text-center">
+            <div className="flex justify-center gap-2 md:gap-3">
+              <button
                 onClick={() => setEditingProduct(p)}
-                className="text-blue-600 hover:text-blue-800 transition-colors"
-                title="Editar"
-                >
-                <FiEdit2 size={18} />
-                <span className="hidden md:inline ml-1 hover:underline font-medium">Editar</span>
-                </button>
-                <button
-                onClick={() => { if(confirm("¿Eliminar?")) handleDelete(p.id).then(fetchProducts) }}
-                className="text-red-600 hover:text-red-800 transition-colors"
-                title="Eliminar"
-                >
-                <FiTrash2 size={18} />
-                <span className="hidden md:inline ml-1 hover:underline font-medium">Eliminar</span>
-                </button>
+                className="text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1"
+              >
+                <FiEdit2 size={18} className="md:hidden" />
+                <span className="hidden md:inline hover:underline font-medium">Editar</span>
+              </button>
+              <button
+                onClick={() => { handleDelete(p.id).then(fetchProducts) }}
+                className="text-red-600 hover:text-red-800 transition-colors flex items-center gap-1"
+              >
+                <FiTrash2 size={18} className="md:hidden" />
+                <span className="hidden md:inline hover:underline font-medium">Eliminar</span>
+              </button>
             </div>
           </td>
         </tr>

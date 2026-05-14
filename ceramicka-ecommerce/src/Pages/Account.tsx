@@ -3,6 +3,8 @@ import { supabase } from '../lib/supabaseClient';
 import { accountService } from '../services/authAccountService';
 import { useAuth } from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss';
 
 export const Account = () => {
   const [load, setLoad] = useState(true);
@@ -55,14 +57,30 @@ export const Account = () => {
 
         if(profile.email !== user.email) {
           await accountService.updateEmail(profile.email);
-          alert("Perfil actualizado. Se envio un correo de confirmacion a tu neuva direccion de correo electronico");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Perfil actualizado. Se envio un correo de confirmacion a tu nueva direccion de correo electronico",
+            showConfirmButton: false,
+            timer: 3000
+          });
         } else {
-          alert("Perfil actualizado con exito!");
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Perfil actualizado con exito!",
+            showConfirmButton: false,
+            timer: 3000
+          });
         }
 
       
     } catch (error: any) {
-      alert(error.message);
+      Swal.fire({
+        icon: "error",
+          title: "Oops...",
+          text: "Ocurrio un error :(",
+      });
     } finally {
       setLoad(false);
     }

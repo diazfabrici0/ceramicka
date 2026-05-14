@@ -139,9 +139,9 @@ const Carousel = ({ data }: { data: CarouselItem[] }) => {
                             />
                             {offset === 0 && (
                                 <div className="mt-4 text-center">
-                                    <h3 className="text-lg font-medium text-white">{item.name}</h3>
+                                    <h3 className="text-lg font-medium text-white ">{item.name}</h3>
                                     {item.price && (
-                                        <p className="text-[#f880b8] font-semibold">${item.price.toLocaleString()}</p>
+                                        <p className="text-[#f880b8] font-semibold bg-[#ffffffc5] rounded-xl">${item.price.toLocaleString()}</p>
                                     )}
                                 </div>
                             )}

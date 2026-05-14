@@ -1,5 +1,7 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { supabase } from '../../lib/supabaseClient';
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss';
 
 interface Categoria {
     name: string;
@@ -11,13 +13,10 @@ export function CategoriesForm() {
     const [description, setDescription] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
 
-    // Tipamos el evento del formulario
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setLoading(true);
 
-        // Supabase infiere los tipos si generaste los tipos con su CLI, 
-        // si no, podemos pasarle la interfaz manualmente
         const { error } = await supabase
             .from('category')
             .insert([
@@ -30,9 +29,19 @@ export function CategoriesForm() {
         setLoading(false);
 
         if (error) {
-            alert("Error: " + error.message);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Ocurrio un error al subir la categoria!",
+            });
         } else {
-            alert("¡Categoría guardada con éxito!");
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Guardado con exito!",
+                showConfirmButton: false,
+                timer: 3000
+            });
             setName('');
             setDescription('');
         }

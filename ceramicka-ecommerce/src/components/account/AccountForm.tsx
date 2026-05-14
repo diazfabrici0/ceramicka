@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabaseClient';
 import { accountService } from '../../services/authAccountService';
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss';
 
 export const Account = () => {
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState({
     full_name: '',
     phone_number: '',
-    email: '' // El email viene de Auth
+    email: ''
   });
 
   useEffect(() => {
@@ -40,10 +42,20 @@ export const Account = () => {
           phone_number: profile.phone_number,
           updated_at: new Date()
         });
-        alert("¡Perfil actualizado!");
+         Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Perfil actualizado con exito!",
+            showConfirmButton: false,
+            timer: 3000
+          });
       }
     } catch (error: any) {
-      alert(error.message);
+      Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Ocurrio un error al actualizar el perfil!",
+        });
     } finally {
       setLoading(false);
     }
